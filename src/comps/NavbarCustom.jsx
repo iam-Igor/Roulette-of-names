@@ -35,8 +35,6 @@ const NavbarCustom = () => {
           >
             Dark <i className="bi bi-lightbulb-off"></i>
           </NavDropdown.Item>
-          <NavDropdown.Divider />
-          <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
         </NavDropdown>
       </Container>
     </Navbar>
