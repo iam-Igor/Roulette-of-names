@@ -210,8 +210,6 @@ const Main = () => {
     };
   }, []);
 
-  console.log(windowWidth);
-
   return (
     <Container className="mb-5">
       {isExploding && (
