@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
 import { Cell, Pie, PieChart } from "recharts";
 import { motion } from "framer-motion";
@@ -8,6 +8,7 @@ const Main = () => {
   const [rotationAngle, setRotationAngle] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [nameAdded, setNameAdded] = useState("");
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const [isExploding, setIsExploding] = useState(false);
 
@@ -197,6 +198,20 @@ const Main = () => {
     setData(newArray);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  console.log(windowWidth);
+
   return (
     <Container className="mb-5">
       {isExploding && (
@@ -231,8 +246,8 @@ const Main = () => {
             }}
           >
             <PieChart
-              width={600}
-              height={600}
+              width={windowWidth <= 480 ? 300 : 600}
+              height={windowWidth <= 480 ? 300 : 600}
               className="pie-chart"
               id="pie-chart"
             >
@@ -242,8 +257,8 @@ const Main = () => {
                 data={data}
                 cx="50%"
                 cy="50%"
-                innerRadius={60}
-                outerRadius={300}
+                innerRadius={windowWidth <= 480 ? 30 : 60}
+                outerRadius={windowWidth <= 480 ? 150 : 300}
                 fill="#8884d8"
                 dataKey="value"
                 labelLine={false}
@@ -265,7 +280,7 @@ const Main = () => {
           </motion.div>
         </Col>
 
-        <Col className="col-12 col-md-4 border border-start p-3 rounded-4 shadow-btm">
+        <Col className="col-12 col-md-4 border border-start p-3 rounded-4 shadow-btm mt-3 mt-md-0">
           <div className="d-flex justify-content-around">
             <h2>Spin the wheel</h2>
             <Button
@@ -324,7 +339,7 @@ const Main = () => {
             </Button>
           </Form>
           <h4 className="mt-5">Or edit existing ones</h4>
-          <div className="mb-2">
+          <div className="mb-4 mb-md-3">
             <Button
               className="btn-secondary fs-5 rounded-4 px-4 py-1"
               onClick={randomizeArray}
