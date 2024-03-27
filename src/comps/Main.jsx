@@ -3,6 +3,7 @@ import { Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
 import { Cell, Pie, PieChart } from "recharts";
 import { motion } from "framer-motion";
 import ConfettiExplosion from "react-confetti-explosion";
+import random from "random";
 
 const Main = () => {
   const [rotationAngle, setRotationAngle] = useState(0);
@@ -130,12 +131,21 @@ const Main = () => {
     newData[index].name = e.target.value;
     setData(newData);
   };
+
+  console.log(rotationAngle);
+
   const startAnimation = () => {
-    const minRotationAngle = -1020;
-    const randomAngle = Math.floor(Math.random() * minRotationAngle);
-    const initialOffset = 360 * Math.floor(Math.random() * 10); // Calcola un grado di partenza casuale
-    const finalAngle = initialOffset + minRotationAngle + randomAngle; // Aggiungi l'offset all'angolo casuale
-    setRotationAngle(finalAngle);
+    let minRotationAngle;
+    let diff;
+
+    do {
+      const rndm = random.int(10000, 20000);
+      minRotationAngle = rndm;
+
+      diff = Math.abs(rotationAngle - minRotationAngle);
+    } while (diff <= 5000);
+
+    setRotationAngle(minRotationAngle);
     setIsAnimating(true);
 
     setTimeout(() => {
@@ -197,6 +207,9 @@ const Main = () => {
     }
     setData(newArray);
   };
+
+  // const animatedDiv = document.getElementById("animated-div");
+  // console.log(animatedDiv.getAttribute("style"));
 
   useEffect(() => {
     const handleResize = () => {
