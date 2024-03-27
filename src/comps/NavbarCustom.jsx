@@ -4,7 +4,7 @@ const NavbarCustom = () => {
   return (
     <Navbar expand="lg" bg="primary" className="shadow-btm">
       <Container>
-        <Navbar.Brand href="#home" className="text-white">
+        <Navbar.Brand href="#home" className="text-white pop-up-text">
           Roulette of names
         </Navbar.Brand>
       </Container>

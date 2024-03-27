@@ -188,6 +188,15 @@ const Main = () => {
     setShow(true);
   };
 
+  const randomizeArray = () => {
+    const newArray = [...data];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    setData(newArray);
+  };
+
   return (
     <Container className="mb-5">
       {isExploding && (
@@ -228,6 +237,7 @@ const Main = () => {
               id="pie-chart"
             >
               <Pie
+                animationDuration={0}
                 className="wheel-col"
                 data={data}
                 cx="50%"
@@ -256,18 +266,18 @@ const Main = () => {
         </Col>
 
         <Col className="col-12 col-md-4 border border-start p-3 rounded-4 shadow-btm">
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-around">
             <h2>Spin the wheel</h2>
             <Button
               disabled={isAnimating ? true : false}
-              className="btn-start rounded-4 btn-warning"
+              className="btn-start rounded-circle btn-warning"
               onClick={startAnimation}
             >
-              Spin<i className="bi bi-arrow-repeat"></i>
+              <i className="bi bi-arrow-repeat fs-4"></i>
             </Button>
           </div>
           <hr></hr>
-          <h2>Add your entries here</h2>
+          <h4>Add your entries here</h4>
           <Form
             onSubmit={(e) => {
               handleSubmit(e);
@@ -294,16 +304,18 @@ const Main = () => {
                 }}
               />
               {showAdvanced && (
-                <Form.Control
-                  className="mt-2"
-                  type="color"
-                  id="exampleColorInput"
-                  defaultValue="#563d7c"
-                  title="Choose your color"
-                  onChange={(e) => {
-                    setColor(e.target.value);
-                  }}
-                />
+                <div className="d-flex align-items-center mt-2">
+                  <Form.Control
+                    type="color"
+                    id="exampleColorInput"
+                    defaultValue="#563d7c"
+                    title="Choose your color"
+                    onChange={(e) => {
+                      setColor(e.target.value);
+                    }}
+                  />
+                  <p className="m-0 ms-2">Pick a color</p>
+                </div>
               )}
             </div>
             <hr></hr>
@@ -311,8 +323,16 @@ const Main = () => {
               Enter
             </Button>
           </Form>
-          <h3 className="mt-5">Or edit existing ones</h3>
-          <Form className="overflow-y-scroll names-form">
+          <h4 className="mt-5">Or edit existing ones</h4>
+          <div className="mb-2">
+            <Button
+              className="btn-secondary fs-5 rounded-4 px-4 py-1"
+              onClick={randomizeArray}
+            >
+              <i className="bi bi-shuffle"></i>
+            </Button>
+          </div>
+          <Form className="overflow-y-scroll names-form p-3 rounded-4 shadow-inside">
             {data.map((entry, index) => {
               return (
                 <div key={"form" + index} className="d-flex align-items-center">

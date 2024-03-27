@@ -1,11 +1,13 @@
 import { Col, Container, Row } from "react-bootstrap";
 
 const Footer = () => {
+  const now = new Date();
+
   return (
     <Container className="bg-black text-white mt-auto" fluid>
       <Row className="py-3">
         <Col className="text-center">
-          <p>Developed by Ygor Garofalo</p>
+          <p>Developed by Ygor Garofalo | {now.getFullYear()}</p>
           <ul className="list-unstyled d-flex justify-content-around">
             <li>
               <a href="https://github.com/iam-Igor">
