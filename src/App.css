@@ -54,7 +54,7 @@ button:not(.btn-close) {
   border-color: #ffc107 !important;
 }
 
-a {
+.footer a {
   color: white !important;
 }
 #root {
@@ -86,4 +86,24 @@ input:focus:not(#custom-switch) {
     transform: translateZ(0);
     opacity: 1;
   }
+}
+
+/* NAVBAR */
+
+.navbar {
+  background-color: #3f51b5 !important;
+}
+
+.navbar a,
+span {
+  color: white !important;
+}
+
+.navbar .dropdown-menu {
+  background-color: #303f9f;
+}
+
+.navbar .dropdown-item:hover {
+  background-color: white !important;
+  color: black !important;
 }

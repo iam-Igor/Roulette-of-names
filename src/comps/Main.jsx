@@ -4,8 +4,11 @@ import { Cell, Pie, PieChart } from "recharts";
 import { motion } from "framer-motion";
 import ConfettiExplosion from "react-confetti-explosion";
 import random from "random";
+import { useSelector } from "react-redux";
 
 const Main = () => {
+  const darkMode = useSelector((state) => state.darkModeEnabled);
+
   const [rotationAngle, setRotationAngle] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [nameAdded, setNameAdded] = useState("");
@@ -132,8 +135,6 @@ const Main = () => {
     setData(newData);
   };
 
-  console.log(rotationAngle);
-
   const startAnimation = () => {
     let minRotationAngle;
     let diff;
@@ -224,7 +225,11 @@ const Main = () => {
   }, []);
 
   return (
-    <Container className="mb-5">
+    <Container
+      fluid
+      className={`pb-5 ${darkMode ? "bg-dark text-white" : ""}`}
+      data-bs-theme={darkMode ? "dark" : "light"}
+    >
       {isExploding && (
         <ConfettiExplosion width={10000} duration={3000} particleCount={200} />
       )}
@@ -234,7 +239,7 @@ const Main = () => {
           xmlns="http://www.w3.org/2000/svg"
           width="60"
           height="60"
-          fill="currentColor"
+          fill={darkMode ? "white" : "black"}
           className="bi bi-caret-right-fill pointer-icon"
           viewBox="0 0 16 16"
         >
@@ -291,7 +296,7 @@ const Main = () => {
           </motion.div>
         </Col>
 
-        <Col className="col-12 col-md-4 border border-start p-3 rounded-4 shadow-btm mt-3 mt-md-0">
+        <Col className="col-12 col-md-3 border border-start p-3 rounded-4 shadow-btm mt-3 mt-md-0">
           <div className="d-flex justify-content-around">
             <h2>Spin the wheel</h2>
             <Button
