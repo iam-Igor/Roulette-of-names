@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 const Main = () => {
   const darkMode = useSelector((state) => state.darkModeEnabled);
   const pieRef = useRef(null);
-
+  const [showError, setShowError] = useState("");
   const [rotationAngle, setRotationAngle] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [nameAdded, setNameAdded] = useState("");
@@ -35,9 +35,13 @@ const Main = () => {
   ]);
 
   const removeItemAtIndex = (indexToRemove) => {
-    setData((prevData) =>
-      prevData.filter((_, index) => index !== indexToRemove)
-    );
+    if (data.length > 2) {
+      setData((prevData) =>
+        prevData.filter((_, index) => index !== indexToRemove)
+      );
+    } else {
+      setShowError("delete");
+    }
   };
 
   const COLORS = [
@@ -67,9 +71,11 @@ const Main = () => {
       };
     }
 
-    console.log(option, showAdvanced);
-
-    setData([...data, option]);
+    if (data.length <= 50) {
+      setData([...data, option]);
+    } else {
+      setShowError("add");
+    }
   };
 
   const getBrightness = (param) => {
@@ -422,6 +428,33 @@ const Main = () => {
             }}
           >
             Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal
+        show={showError === "delete" || showError === "add"}
+        onHide={() => {
+          setShowError("");
+        }}
+      >
+        <Modal.Header closeButton className="bg-danger text-white">
+          <Modal.Title>{"We got an error here :("}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {showError === "delete"
+            ? "At least two items have to be present inside the wheel!"
+            : showError === "add"
+            ? "You can't add more than 50 items in the wheel!"
+            : ""}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary rounded-4"
+            onClick={() => {
+              setShowError(false);
+            }}
+          >
+            Understand
           </Button>
         </Modal.Footer>
       </Modal>
