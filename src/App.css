@@ -38,7 +38,7 @@ button:not(.btn-close) {
   .pointer-icon {
     position: absolute;
     top: -3.7%;
-    left: -3%;
+    left: -1%;
 
     z-index: 1;
     transform: rotate(90deg);
