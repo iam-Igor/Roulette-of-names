@@ -19,7 +19,7 @@ const NavbarCustom = () => {
         <NavDropdown
           title={<i className="bi bi-gear-wide-connected"></i>}
           id="basic-nav-dropdown"
-          className="me-auto"
+          className="mx-auto"
         >
           <NavDropdown.Item
             onClick={() => {

@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 const Main = () => {
   const darkMode = useSelector((state) => state.darkModeEnabled);
+  const pieRef = useRef(null);
 
   const [rotationAngle, setRotationAngle] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -209,9 +210,6 @@ const Main = () => {
     setData(newArray);
   };
 
-  // const animatedDiv = document.getElementById("animated-div");
-  // console.log(animatedDiv.getAttribute("style"));
-
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -268,6 +266,7 @@ const Main = () => {
               id="pie-chart"
             >
               <Pie
+                ref={pieRef}
                 animationDuration={0}
                 className="wheel-col"
                 data={data}
