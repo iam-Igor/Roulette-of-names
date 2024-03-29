@@ -159,7 +159,7 @@ const Main = () => {
     setTimeout(() => {
       setIsAnimating(false);
       handleArrowClick();
-    }, 6000);
+    }, 7000);
   };
   const calculateDistance = (x1, y1, x2, y2) => {
     const dx = x2 - x1;
@@ -263,7 +263,7 @@ const Main = () => {
                 : { rotate: rotationAngle }
             }
             transition={{
-              duration: 5,
+              duration: 6,
               ease: [0.1, 0.685, 0.32, 1],
             }}
           >

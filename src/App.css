@@ -107,3 +107,9 @@ span {
   background-color: white !important;
   color: black !important;
 }
+
+@media screen and (max-width: 480px) {
+  .navbar .dropdown-menu {
+    left: -178%;
+  }
+}
